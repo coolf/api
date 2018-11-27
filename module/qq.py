@@ -92,3 +92,11 @@ class QQ():
             return self.RtContent(data=data)
         else:
             return self.RtContent(errcode=400, errmsg='接口出错。请联系管理员')
+
+    def city(self):
+        url = 'http://yundong.qq.com/center/guest?_wv=2172899&asyncMode=1&uin=' + self.qq
+        self.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; PRO 6 Build/MRA58K; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043221 Safari/537.36 V1_AND_SQ_7.0.0_676_YYB_D QQ/7.0.0.3135 NetType/WIFI WebP/0.3.0 Pixel/1080'})
+        r = requests.get(url, cookies=self.cookie, headers=self.headers).text
+        # print(self.qwbzj(r,'window.__INITIAL_DATA__=','</script>'))
+        return r
