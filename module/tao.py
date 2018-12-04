@@ -77,3 +77,5 @@ class TaoText():
         else:
             errmsg = res['error_response']['sub_msg']
             return self.RtContent(errcode=400, errmsg=errmsg)
+
+
