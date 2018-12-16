@@ -215,3 +215,10 @@ function xsubmit_info(url1) {
         for x in a:
             userlist.append(x)
         return userlist
+
+    def groupInfo(self):
+        a = mongo.db[self.id].find({'qq':self.qq},{'_id':0,'FriendList':0})
+        userlist = []
+        for x in a:
+            userlist.append(x)
+        return userlist

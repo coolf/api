@@ -91,7 +91,7 @@ class qqLogin():
         # try:
         #     with open(Uin + '.txt', 'a', encoding='utf8') as f:
         #         f.write(FriendList)
-        #     print(Uin + ":生成完毕�?)
+        #     print(Uin + ":生成完毕�?)
         # except Exception as e:
         #     print(e)
 

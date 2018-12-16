@@ -3,11 +3,11 @@ from module.tao import TaoText
 from module.yuming import YmTool
 from module.music import MusicScript
 from module.qq import QQ
-from module.updateCookie import updataCookie,WeiboCookieUpdata
 from module.imgDown import ImgDown
 from module.axjs import axJs
 from qx.qx import qqLogin
 from app import app, errmsg, request,jsonify
+from module.login import loginHome
 
 
 # 短网址API 路由
@@ -123,7 +123,7 @@ def userinfo(id):
 
 
 # QQ详细信息
-
+# QQ还有
 @app.route('/js/info/')
 def info():
     id = request.args.get('id')
@@ -131,15 +131,38 @@ def info():
 
     return jsonify({'data': axJs(id,qq).userInfo(), 'code': 0})
 
+# QQ群
+@app.route('/js/quninfo/')
+def quninfo():
+    id = request.args.get('id')
+    qq = request.args.get('qq')
+
+    return jsonify({'data': axJs(id,qq).groupInfo(), 'code': 0})
+
+
 @app.route('/imgfile',methods=['POST'])
 def imgfile():
     try:
         code = request.form.get('code')
         img = request.form.get('img')
-        return ImgDown(code, img).content
+        uid = request.form.get('uid')
+        return ImgDown(code, img,uid).content
     except Exception as e:
         print(e)
         return errmsg
+
+@app.route('/login', methods=['GET'])
+def login():
+    code = request.args.get('code')
+    if not code:
+        return ''
+    else:
+        return loginHome(request).content
+
+@app.route('/lgoin/imgurl')
+def urlinfo():
+    uid = request.args.get('uid')
+    return ImgDown('','',uid).urlinfo
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8807, debug=True)
